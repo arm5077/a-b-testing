@@ -11,10 +11,28 @@
 <body>
 
 <body ng-app="ABCreator">
+  <nav class="navbar navbar-inverse" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Pittsburgh Post-Gazette's A-B test creator</a>
+		</div>
+	</div>
+</nav>
   <div class="container">
     <h1>Want to make a Libercus story that will randomly send users to two or more <em>other</em> stories?<br/>Your time has come.</h1>
-    <p class="lead">We know people like our stories. But what if they would like them better if we added more pull quotes, or rewrote them as a Q&A, or included a <a href="http://www.watson.ch/imgdb/0ff5/Qx,E,0,0,3000,1956,1250,815,500,326/2743755217521083">picture of David Hasselhoff</a>?</p>
-    <p class="lead">Add links to already-published Libercus stories below and embed the resulting code on the Libercus page you'll actually be linking to from the homepage. The result: Controlled A-B testing that will hopefully give us useful insights.</p>	
+    <p class="lead">We know people like our stories. But what if they would like them better if we added more pull quotes, or rewrote them as a Q&A, or included a <a href="http://www.watson.ch/imgdb/0ff5/Qx,E,0,0,3000,1956,1250,815,500,326/2743755217521083" target="_blank">picture of David Hasselhoff</a>?</p>
+    
+	<form name="urlForm" role="form" novalidate ng-controller = "FormController as formCtrl" ng-submit="formCtrl.submit(formCtrl.sites)">
+	  <div class="form-group" ng-repeat="site in formCtrl.sites" ng-class="{ 'has-error':urlForm.url.$invalid && urlForm.url.$dirty, 'has-success': urlForm.url.$valid && urlForm.url.$dirty }">
+        <label for="url">URL of Libercus story page</label>
+		<input type="url" class="form-control" name="url" ng-model="site.url" required>
+	  </div>
+	  <div class = "form-group">
+		<button class = "btn" ng-click="formCtrl.sites.push({ url:'' });">Add new</button>
+		<button type="submit" class = "btn btn-primary" ng-disabled="!urlForm.url.$valid">Submit</button>
+	  </div>
+	</form>  
+  </div>	
 </body>
 
 </body>
