@@ -1,7 +1,7 @@
 <?PHP
 	
-	// Make unique id by concatenating websites and removing formatting
-	$unique_id = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $_GET["content"]));
+	// Make unique id using unix epoch
+	$unique_id = time();
 	
 	// Create redirect file
 	$redirect_handle = fopen("../redirects/" . $unique_id .".html", "w+");
